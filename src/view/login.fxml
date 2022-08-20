@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.loginController">
    <children>
       <Label layoutX="152.0" layoutY="175.0" text="Username" />
       <Label layoutX="152.0" layoutY="212.0" text="Password" />
@@ -16,9 +15,13 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="location" layoutX="414.0" layoutY="53.0" prefHeight="17.0" prefWidth="90.0" text="Label" />
       <TextField fx:id="usernameTF" layoutX="238.0" layoutY="171.0" />
       <TextField fx:id="passwordTF" layoutX="238.0" layoutY="208.0" />
       <Button layoutX="261.0" layoutY="262.0" mnemonicParsing="false" onAction="#Login" text="Login" />
+      <Label fx:id="location" layoutX="460.0" layoutY="71.0" text="United States">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
