@@ -7,9 +7,11 @@ import java.sql.*;
 
 public abstract class DBCustomers {
     public static ObservableList<Customers> getAllCustomers() {
+        // declare observable list to be returned.
         try{
-            String sql  = "Select * FROM customers";
-            String sqlFirstLevel  = "Select * FROM first_level_diviso";
+            String sql  = "Select Customer_ID, Customer_Name, Address, Postal_Code, Phone, customers.Division_ID, Division, first_level_divisions.Country_ID, Country FROM customers, first_level_divisions, countries WHERE customers.Division_ID = first_level_divisions.Division_ID AND first_level_divisions.Country_ID = countries.Country_ID;\n" +
+                    "\n";
+//            String sqlFirstLevel  = "Select * FROM first_level_diviso";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -21,9 +23,9 @@ public abstract class DBCustomers {
                 int divisionId = rs.getInt("Division_ID");
 
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return getAllCustomers();
+        //return Observablelist;
     }
 }
