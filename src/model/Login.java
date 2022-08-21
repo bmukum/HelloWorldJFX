@@ -24,6 +24,7 @@ public class Login extends Application {
     public static void main(String[] args) {
         JDBC.makeConnection();
         ZoneId zoneId = ZoneId.systemDefault();
+
         Locale.setDefault(new Locale("fr"));
         launch(args);
     }
