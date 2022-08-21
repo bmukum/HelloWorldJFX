@@ -3,6 +3,7 @@ package controller;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,9 +15,11 @@ import javafx.stage.Stage;
 import model.Appointments;
 import model.Customers;
 
+import java.net.URL;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class mainController {
+public class mainController implements Initializable {
     public TableView customerTableView;
     public TableColumn cIdCol;
     public TableColumn cNameCol;
@@ -141,5 +144,10 @@ public class mainController {
 
     public void weekRadioButton(ActionEvent actionEvent) {
         //implement the filter
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }

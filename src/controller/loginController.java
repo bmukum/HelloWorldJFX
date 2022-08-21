@@ -1,5 +1,6 @@
 package controller;
 
+import database.DBLogin;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,7 +31,27 @@ public class loginController implements Initializable {
     }
 
     public void Login(ActionEvent actionEvent) throws IOException {
-        try {
+//        try {
+//
+//            String username = usernameTF.getText();
+//            String password = passwordTF.getText();
+//            if (DBLogin.checkLogin(username, password) == true){
+//                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
+//                Parent root = loader.load();
+
+//                Stage addPartStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+//                Scene addPartScene = new Scene(root, 1300, 690);
+//                addPartStage.setTitle("Main Screen");
+//                addPartStage.setScene(addPartScene);
+//                addPartStage.show();
+//            }
+//            else if (DBLogin.checkLogin(username, password) == false){
+//                Alert alert = new Alert(Alert.AlertType.WARNING);
+//                alert.setTitle("Warning Dialog");
+//                alert.setContentText("Username or password is wrong. Please double-check!");
+//                alert.showAndWait();
+//                return;
+//            }
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
             Parent root = loader.load();
 
@@ -39,8 +60,8 @@ public class loginController implements Initializable {
             addPartStage.setTitle("Main Screen");
             addPartStage.setScene(addPartScene);
             addPartStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 }
