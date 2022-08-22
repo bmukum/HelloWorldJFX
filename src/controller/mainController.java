@@ -1,6 +1,9 @@
 package controller;
 
+import database.DBCustomers;
 import javafx.application.Platform;
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointments;
 import model.Customers;
@@ -24,7 +28,6 @@ public class mainController implements Initializable {
     public TableColumn cIdCol;
     public TableColumn cNameCol;
     public TableColumn cAddressCol;
-    public TableColumn cStateCol;
     public TableColumn cCountryCol;
     public TableColumn cPostalCodeCol;
     public TableColumn cPhoneCol;
@@ -39,6 +42,24 @@ public class mainController implements Initializable {
     public TableColumn aEndCol;
     public TableColumn aCustIdCol;
     public TableColumn aUserIdCol;
+    public TableColumn cDivisionCol;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        customerTableView.setItems(DBCustomers.getAllCustomers());
+
+        cIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        cNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        cAddressCol .setCellValueFactory(new PropertyValueFactory<>("address"));
+        cDivisionCol.setCellValueFactory(new PropertyValueFactory<>("division"));
+        cCountryCol.setCellValueFactory(new PropertyValueFactory<>("country"));
+        cPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+        cPhoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
+
+
+    }
+
 
     public void exit(ActionEvent actionEvent) {
         Platform.exit();
@@ -144,10 +165,5 @@ public class mainController implements Initializable {
 
     public void weekRadioButton(ActionEvent actionEvent) {
         //implement the filter
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 }

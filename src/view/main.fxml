@@ -31,7 +31,7 @@
                 <TableColumn fx:id="cIdCol" prefWidth="75.0" text="ID" />
                 <TableColumn fx:id="cNameCol" prefWidth="75.0" text="Name" />
                   <TableColumn fx:id="cAddressCol" prefWidth="75.0" text="Address" />
-                  <TableColumn fx:id="cStateCol" prefWidth="75.0" text="State/Province" />
+                  <TableColumn fx:id="cDivisionCol" prefWidth="75.0" text="Division" />
                   <TableColumn fx:id="cCountryCol" prefWidth="75.0" text="Country" />
                   <TableColumn fx:id="cPostalCodeCol" prefWidth="75.0" text="Postal Code" />
                   <TableColumn fx:id="cPhoneCol" prefWidth="109.0" text="Phone #" />
