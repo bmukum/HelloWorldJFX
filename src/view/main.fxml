@@ -39,25 +39,25 @@
             </TableView>
          </children>
       </AnchorPane>
-      <TableView fx:id="apptTableView" layoutX="7.0" layoutY="338.0" prefHeight="200.0" prefWidth="752.0">
+      <TableView fx:id="apptTableView" layoutX="7.0" layoutY="338.0" prefHeight="200.0" prefWidth="886.0">
         <columns>
-          <TableColumn fx:id="aIdCol" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="aTitleCol" prefWidth="75.0" text="Title" />
-            <TableColumn fx:id="aDescCol" prefWidth="75.0" text="Description" />
-            <TableColumn fx:id="aLocationCol" prefWidth="75.0" text="Location" />
-            <TableColumn fx:id="aContactCol" prefWidth="75.0" text="Contact" />
-            <TableColumn fx:id="aTypeCol" prefWidth="75.0" text="Type" />
-            <TableColumn fx:id="aStartCol" prefWidth="75.0" text="Start Date" />
-            <TableColumn fx:id="aEndCol" prefWidth="75.0" text="End Date" />
-            <TableColumn fx:id="aCustIdCol" prefWidth="75.0" text="Customer ID" />
-            <TableColumn fx:id="aUserIdCol" prefWidth="75.0" text="User ID" />
+          <TableColumn fx:id="aIdCol" prefWidth="51.0" text="ID" />
+          <TableColumn fx:id="aTitleCol" text="Title" />
+            <TableColumn fx:id="aDescCol" prefWidth="94.0" text="Description" />
+            <TableColumn fx:id="aLocationCol" prefWidth="116.0" text="Location" />
+            <TableColumn fx:id="aContactCol" prefWidth="98.0" text="Contact" />
+            <TableColumn fx:id="aTypeCol" prefWidth="77.0" text="Type" />
+            <TableColumn fx:id="aStartCol" prefWidth="92.0" text="Start Date" />
+            <TableColumn fx:id="aEndCol" prefWidth="131.0" text="End Date" />
+            <TableColumn fx:id="aCustIdCol" prefWidth="71.0" text="Customer ID" />
+            <TableColumn fx:id="aUserIdCol" prefWidth="74.0" text="User ID" />
         </columns>
       </TableView>
-      <Button layoutX="850.0" layoutY="546.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
+      <Button layoutX="656.0" layoutY="569.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
       <RadioButton layoutX="15.0" layoutY="316.0" mnemonicParsing="false" onAction="#monthRadioButton" text="View appointments by month" />
       <RadioButton layoutX="200.0" layoutY="316.0" mnemonicParsing="false" onAction="#weekRadioButton" text="View Appointments by week" />
-      <Button layoutX="790.0" layoutY="450.0" mnemonicParsing="false" onAction="#seeReports" text="See reports" />
-      <Label layoutX="776.0" layoutY="425.0" prefHeight="25.0" prefWidth="142.0" text="Your reports are ready!" />
+      <Button layoutX="361.0" layoutY="570.0" mnemonicParsing="false" onAction="#seeReports" text="See reports" />
+      <Label layoutX="336.0" layoutY="545.0" prefHeight="25.0" prefWidth="142.0" text="Your reports are ready!" />
       <RadioButton layoutX="390.0" layoutY="316.0" mnemonicParsing="false" onAction="#viewAll" text="View All" />
    </children>
 </AnchorPane>

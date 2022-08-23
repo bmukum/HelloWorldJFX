@@ -17,9 +17,7 @@ import model.Contacts;
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.time.*;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -56,12 +54,14 @@ public class addAppointment implements Initializable {
             int contactId = c.getId();
             String type = typeTF.getText();
             LocalDate localDate = dateDP.getValue();
-            Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-            Date date = Date.from(instant);
+            LocalTime startLocalTime = LocalTime.parse(startTF.getText());
+            LocalTime endLocalTime = LocalTime.parse(endTF.getText());
+            LocalDateTime localStart = LocalDateTime.of(localDate, startLocalTime);
+            LocalDateTime localEnd = LocalDateTime.of(localDate, endLocalTime);
             String start = startTF.getText();
-            Time
 
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
