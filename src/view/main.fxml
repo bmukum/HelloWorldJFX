@@ -8,19 +8,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="699.0" prefWidth="1069.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainController">
+<AnchorPane prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainController">
    <children>
       <Label layoutX="21.0" layoutY="29.0" text="Customers">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label layoutX="27.0" layoutY="340.0" prefHeight="20.0" prefWidth="142.0" text="Appointments">
+      <Label layoutX="16.0" layoutY="291.0" prefHeight="20.0" prefWidth="142.0" text="Appointments">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Button layoutX="179.0" layoutY="615.0" mnemonicParsing="false" onAction="#deleteAppt" text="Delete" />
-      <Button layoutX="16.0" layoutY="615.0" mnemonicParsing="false" onAction="#addAppt" text="Add" />
-      <Button layoutX="86.0" layoutY="615.0" mnemonicParsing="false" onAction="#updateAppt" text="Update" />
+      <Button layoutX="142.0" layoutY="546.0" mnemonicParsing="false" onAction="#deleteAppt" text="Delete" />
+      <Button layoutX="21.0" layoutY="545.0" mnemonicParsing="false" onAction="#addAppt" text="Add" />
+      <Button layoutX="77.0" layoutY="545.0" mnemonicParsing="false" onAction="#updateAppt" text="Update" />
       <AnchorPane layoutX="14.0" layoutY="68.0" prefHeight="200.0" prefWidth="559.0">
          <children>
             <Button layoutX="20.0" layoutY="186.0" mnemonicParsing="false" onAction="#addCustomer" text="Add" />
@@ -39,7 +39,7 @@
             </TableView>
          </children>
       </AnchorPane>
-      <TableView fx:id="apptTableView" layoutX="16.0" layoutY="408.0" prefHeight="200.0" prefWidth="752.0">
+      <TableView fx:id="apptTableView" layoutX="7.0" layoutY="338.0" prefHeight="200.0" prefWidth="752.0">
         <columns>
           <TableColumn fx:id="aIdCol" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="aTitleCol" prefWidth="75.0" text="Title" />
@@ -53,8 +53,11 @@
             <TableColumn fx:id="aUserIdCol" prefWidth="75.0" text="User ID" />
         </columns>
       </TableView>
-      <Button layoutX="895.0" layoutY="640.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
-      <RadioButton layoutX="27.0" layoutY="382.0" mnemonicParsing="false" onAction="#monthRadioButton" text="View appointments by month" />
-      <RadioButton layoutX="216.0" layoutY="382.0" mnemonicParsing="false" onAction="#weekRadioButton" text="View Appointments by week" />
+      <Button layoutX="850.0" layoutY="546.0" mnemonicParsing="false" onAction="#exit" text="Exit" />
+      <RadioButton layoutX="15.0" layoutY="316.0" mnemonicParsing="false" onAction="#monthRadioButton" text="View appointments by month" />
+      <RadioButton layoutX="200.0" layoutY="316.0" mnemonicParsing="false" onAction="#weekRadioButton" text="View Appointments by week" />
+      <Button layoutX="790.0" layoutY="450.0" mnemonicParsing="false" onAction="#seeReports" text="See reports" />
+      <Label layoutX="776.0" layoutY="425.0" prefHeight="25.0" prefWidth="142.0" text="Your reports are ready!" />
+      <RadioButton layoutX="390.0" layoutY="316.0" mnemonicParsing="false" onAction="#viewAll" text="View All" />
    </children>
 </AnchorPane>

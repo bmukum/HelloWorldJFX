@@ -1,5 +1,6 @@
 package controller;
 
+import database.DBAppointments;
 import database.DBCustomers;
 import javafx.application.Platform;
 import javafx.beans.Observable;
@@ -47,17 +48,30 @@ public class mainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        ObservableList<Customers> cList = DBCustomers.getAllCustomers();
+
         customerTableView.setItems(DBCustomers.getAllCustomers());
 
         cIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         cNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         cAddressCol .setCellValueFactory(new PropertyValueFactory<>("address"));
-        cDivisionCol.setCellValueFactory(new PropertyValueFactory<>("division"));
-        cCountryCol.setCellValueFactory(new PropertyValueFactory<>("country"));
         cPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         cPhoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        cDivisionCol.setCellValueFactory(new PropertyValueFactory<>("division"));
+        cCountryCol.setCellValueFactory(new PropertyValueFactory<>("country"));
 
+        apptTableView.setItems(DBAppointments.getAllAppointments());
 
+        aIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        aTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+        aDescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        aLocationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
+        aTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        aContactCol.setCellValueFactory(new PropertyValueFactory<>("contactId"));
+        aStartCol.setCellValueFactory(new PropertyValueFactory<>("start"));
+        aEndCol.setCellValueFactory(new PropertyValueFactory<>("end"));
+        aCustIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        aUserIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
 
 
@@ -165,5 +179,11 @@ public class mainController implements Initializable {
 
     public void weekRadioButton(ActionEvent actionEvent) {
         //implement the filter
+    }
+
+    public void seeReports(ActionEvent actionEvent) {
+    }
+
+    public void viewAll(ActionEvent actionEvent) {
     }
 }

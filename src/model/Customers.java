@@ -28,16 +28,17 @@ public class Customers {
     public String getAddress(){
         return address;
     }
-    public String postalCode(){
+
+    public String getPostalCode(){
         return postalCode;
     }
-    private String getPhone(){
+    public String getPhone(){
         return phone;
     }
-    private String getDivision() {
+    public String getDivision() {
         return division;
     }
-    private String getCountry(){
+    public String getCountry(){
         return country;
     }
 }

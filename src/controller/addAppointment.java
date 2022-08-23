@@ -21,6 +21,9 @@ public class addAppointment {
     public TextField userTF;
     public DatePicker startDP;
     public DatePicker endDP;
+    public TextField endTF;
+    public TextField startTF;
+    public DatePicker dateDP;
 
     public void save(ActionEvent actionEvent) {
     }
