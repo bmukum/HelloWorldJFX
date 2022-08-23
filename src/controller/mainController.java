@@ -20,7 +20,9 @@ import javafx.stage.Stage;
 import model.Appointments;
 import model.Customers;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -79,7 +81,7 @@ public class mainController implements Initializable {
         Platform.exit();
     }
 
-    public void deleteCustomer(ActionEvent actionEvent) {
+    public void deleteCustomer(ActionEvent actionEvent) throws SQLException, IOException {
         Customers selectedCustomer = (Customers) customerTableView.getSelectionModel().getSelectedItem();
         if (selectedCustomer == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -92,14 +94,31 @@ public class mainController implements Initializable {
         Optional<ButtonType> results = alert.showAndWait();
 
         if(results.isPresent() && results.get() == ButtonType.OK) {
-            //Delete the customer
+            DBCustomers.delete(selectedCustomer.getId());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 1100, 700);
+            stage.setTitle("Main Screen");
+            stage.setScene(scene);
+            stage.show();
         }
     }
 
     public void updateCustomer(ActionEvent actionEvent) {
+        Customers selectedCustomer = (Customers) customerTableView.getSelectionModel().getSelectedItem();
+        if (selectedCustomer == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("Please select a customer to update.");
+            alert.showAndWait();
+            return;
+        }
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/updateCustomer.fxml"));
             Parent root = loader.load();
+            updateCustomer ucc = loader.getController();
+            ucc.loadCustomerInfo(selectedCustomer);
 
             Stage addPartStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene addPartScene = new Scene(root, 1300, 690);

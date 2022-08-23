@@ -21,4 +21,9 @@ public class Divisions {
     public int getCountryId(){
         return countryId;
     }
+
+    @Override
+    public String toString (){
+        return division;
+    }
 }

@@ -43,6 +43,28 @@ public abstract class DBCustomers {
 
         int rowsInserted = ps.executeUpdate();
         return rowsInserted;
+    }
 
+    public static int update(int id,String name, String address, String postalCode, String phone, int divisionId) throws SQLException {
+        String sql = "UPDATE customers set Customer_Name = ? , Address = ? , Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ps.setString(1, name);
+        ps.setString(2, address);
+        ps.setString(3, postalCode);
+        ps.setString(4, phone);
+        ps.setInt(5, divisionId);
+        ps.setInt(6, id);
+
+        int rowsUpdated = ps.executeUpdate();
+        return rowsUpdated;
+    }
+
+    public static int delete(int id) throws SQLException {
+        String sql = "DELETE from customers WHERE Customer_ID = ?";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ps.setInt(1, id);
+
+        int rowsDeleted = ps.executeUpdate();
+        return rowsDeleted;
     }
 }

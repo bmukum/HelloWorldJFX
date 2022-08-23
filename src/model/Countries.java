@@ -16,4 +16,13 @@ public class Countries {
     public String getName(){
         return country;
     }
+
+    public String getCountry() {
+        return country;
+    }
+
+    @Override
+    public String toString (){
+        return country;
+    }
 }
