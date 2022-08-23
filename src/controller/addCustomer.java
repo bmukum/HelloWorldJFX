@@ -80,7 +80,7 @@ public class addCustomer implements Initializable {
             Parent root = loader.load();
 
             Stage addPartStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            Scene addPartScene = new Scene(root, 1300, 690);
+            Scene addPartScene = new Scene(root, 1100, 700);
             addPartStage.setTitle("Main Screen");
             addPartStage.setScene(addPartScene);
             addPartStage.show();

@@ -22,4 +22,9 @@ public class Contacts {
     public String getEmail(){
         return email;
     }
+
+    @Override
+    public String toString (){
+        return name;
+    }
 }

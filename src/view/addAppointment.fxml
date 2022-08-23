@@ -40,8 +40,8 @@
       <DatePicker fx:id="dateDP" layoutX="176.0" layoutY="345.0" />
       <Button layoutX="156.0" layoutY="576.0" mnemonicParsing="false" onAction="#save" text="Save" />
       <Button layoutX="298.0" layoutY="576.0" mnemonicParsing="false" onAction="#cancel" text="cancel" />
-      <TextField fx:id="startTF" layoutX="176.0" layoutY="383.0" />
+      <TextField fx:id="startTF" layoutX="176.0" layoutY="383.0" promptText="HH:MM" />
       <Label layoutX="75.0" layoutY="430.0" text="End Time" />
-      <TextField fx:id="endTF" layoutX="175.0" layoutY="426.0" />
+      <TextField fx:id="endTF" layoutX="175.0" layoutY="426.0" promptText="HH:MM" />
    </children>
 </AnchorPane>
