@@ -95,14 +95,14 @@ public class mainController implements Initializable {
 
         if(results.isPresent() && results.get() == ButtonType.OK) {
             DBCustomers.delete(selectedCustomer.getId());
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root, 1100, 700);
-            stage.setTitle("Main Screen");
-            stage.setScene(scene);
-            stage.show();
         }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 1100, 700);
+        stage.setTitle("Main Screen");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void updateCustomer(ActionEvent actionEvent) {
