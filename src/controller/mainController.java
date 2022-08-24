@@ -1,6 +1,7 @@
 package controller;
 
 import database.DBAppointments;
+import database.DBContacts;
 import database.DBCustomers;
 import javafx.application.Platform;
 import javafx.beans.Observable;
@@ -94,6 +95,11 @@ public class mainController implements Initializable {
         Optional<ButtonType> results = alert.showAndWait();
 
         if(results.isPresent() && results.get() == ButtonType.OK) {
+            for (Appointments appt : DBAppointments.getAllAppointments()){
+                if (appt.getCustomerId() == selectedCustomer.getId()){
+                    DBAppointments.delete(appt.getId());
+                }
+            }
             DBCustomers.delete(selectedCustomer.getId());
         }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
@@ -161,13 +167,23 @@ public class mainController implements Initializable {
     }
 
     public void updateAppt(ActionEvent actionEvent) {
+        Appointments selectedAppt = (Appointments) apptTableView.getSelectionModel().getSelectedItem();
+        if (selectedAppt == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("Please select an appointment to update.");
+            alert.showAndWait();
+            return;
+        }
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/updateAppointment.fxml"));
             Parent root = loader.load();
+            updateAppointment uac = loader.getController();
+            uac.loadApptInfo(selectedAppt);
 
             Stage addPartStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             Scene addPartScene = new Scene(root, 1300, 690);
-            addPartStage.setTitle("Update Appointment");
+            addPartStage.setTitle("Update Customer");
             addPartStage.setScene(addPartScene);
             addPartStage.show();
         } catch (Exception e) {
@@ -175,7 +191,7 @@ public class mainController implements Initializable {
         }
     }
 
-    public void deleteAppt(ActionEvent actionEvent) {
+    public void deleteAppt(ActionEvent actionEvent) throws IOException, SQLException {
         Appointments selectedAppointment = (Appointments) apptTableView.getSelectionModel().getSelectedItem();
         if (selectedAppointment == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -188,8 +204,17 @@ public class mainController implements Initializable {
         Optional<ButtonType> results = alert.showAndWait();
 
         if(results.isPresent() && results.get() == ButtonType.OK) {
-            //Delete the appointment
+            DBAppointments.delete(selectedAppointment.getId());
         }
+
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 1100, 700);
+        stage.setTitle("Main Screen");
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void monthRadioButton(ActionEvent actionEvent) {

@@ -56,26 +56,30 @@ public abstract class DBAppointments {
         return rowsInserted;
     }
 
-//    public static int update(int id,String name, String address, String postalCode, String phone, int divisionId) throws SQLException {
-//        String sql = "UPDATE customers set Customer_Name = ? , Address = ? , Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
-//        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-//        ps.setString(1, name);
-//        ps.setString(2, address);
-//        ps.setString(3, postalCode);
-//        ps.setString(4, phone);
-//        ps.setInt(5, divisionId);
-//        ps.setInt(6, id);
-//
-//        int rowsUpdated = ps.executeUpdate();
-//        return rowsUpdated;
-//    }
+    public static int update(int id,String title, String description, String location, String type, Timestamp startTs, Timestamp endTs, int customerId, int userId, int contactId) throws SQLException {
+        String sql = "UPDATE appointments set Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ps.setString(1, title );
+        ps.setString(2, description);
+        ps.setString(3, location);
+        ps.setString(4, type);
+        ps.setTimestamp(5, startTs);
+        ps.setTimestamp(6, endTs);
+        ps.setInt(7, customerId);
+        ps.setInt(8, userId);
+        ps.setInt(9,contactId);
+        ps.setInt(10, id);
 
-//    public static int delete(int id) throws SQLException {
-//        String sql = "DELETE from customers WHERE Customer_ID = ?";
-//        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-//        ps.setInt(1, id);
-//
-//        int rowsDeleted = ps.executeUpdate();
-//        return rowsDeleted;
-//    }
+        int rowsUpdated = ps.executeUpdate();
+        return rowsUpdated;
+    }
+
+    public static int delete(int id) throws SQLException {
+        String sql = "DELETE from appointments WHERE Appointment_ID = ?";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ps.setInt(1, id);
+
+        int rowsDeleted = ps.executeUpdate();
+        return rowsDeleted;
+    }
 }
