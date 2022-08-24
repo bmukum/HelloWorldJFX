@@ -57,6 +57,9 @@ public class addAppointment implements Initializable {
             Contacts c = (Contacts) contactCB.getSelectionModel().getSelectedItem();
             int contactId = c.getId();
             String type = typeTF.getText();
+            int customerId = Integer.parseInt(customerTF.getText());
+            int userId = Integer.parseInt(userTF.getText());
+
             LocalDate localDate = dateDP.getValue();
             LocalTime startLocalTime = LocalTime.parse(startTF.getText());
             LocalTime endLocalTime = LocalTime.parse(endTF.getText());
@@ -89,16 +92,18 @@ public class addAppointment implements Initializable {
                 alert.showAndWait();
                 return;
             }
+            Timestamp startTs = Timestamp.valueOf(localStart);
+            Timestamp endTs = Timestamp.valueOf(localEnd);
 
-            int rowsAdded = DBAppointments.
+            int rowsAdded = DBAppointments.insert(title, description, location,type, startTs, endTs, customerId, userId, contactId);
 
-//            ZonedDateTime startZoned = localStart.atZone(ZoneId.of(ZoneId.systemDefault().toString()));
-//            ZonedDateTime startZonedEst = startZoned.withZoneSameInstant(ZoneId.of("America/New_York"));
-//
-//            ZonedDateTime endZoned = localEnd.atZone(ZoneId.of(ZoneId.systemDefault().toString()));
-//            ZonedDateTime endZonedEst = endZoned.withZoneSameInstant(ZoneId.of("America/New_York"));
-
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 1100, 700);
+            stage.setTitle("Main Screen");
+            stage.setScene(scene);
+            stage.show();
 
         } catch (Exception e) {
             e.printStackTrace();

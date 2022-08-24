@@ -1,5 +1,6 @@
 package database;
 
+import com.sun.scenario.animation.shared.TimerReceiver;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointments;
@@ -38,4 +39,43 @@ public abstract class DBAppointments {
         }
         return apptList;
     }
+    public static int insert(String title, String description, String location, String type, Timestamp start, Timestamp end, int customerId, int userId, int contactId) throws SQLException{
+        String sql = "INSERT into appointments (Title, Description, Location, Type, Start, End, Customer_ID, User_ID, Contact_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ps.setString(1, title);
+        ps.setString(2, description);
+        ps.setString(3, location);
+        ps.setString(4, type);
+        ps.setTimestamp(5,start);
+        ps.setTimestamp(6, end);
+        ps.setInt(7,customerId);
+        ps.setInt(8,userId);
+        ps.setInt(9,contactId);
+
+        int rowsInserted = ps.executeUpdate();
+        return rowsInserted;
+    }
+
+//    public static int update(int id,String name, String address, String postalCode, String phone, int divisionId) throws SQLException {
+//        String sql = "UPDATE customers set Customer_Name = ? , Address = ? , Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
+//        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+//        ps.setString(1, name);
+//        ps.setString(2, address);
+//        ps.setString(3, postalCode);
+//        ps.setString(4, phone);
+//        ps.setInt(5, divisionId);
+//        ps.setInt(6, id);
+//
+//        int rowsUpdated = ps.executeUpdate();
+//        return rowsUpdated;
+//    }
+
+//    public static int delete(int id) throws SQLException {
+//        String sql = "DELETE from customers WHERE Customer_ID = ?";
+//        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+//        ps.setInt(1, id);
+//
+//        int rowsDeleted = ps.executeUpdate();
+//        return rowsDeleted;
+//    }
 }
