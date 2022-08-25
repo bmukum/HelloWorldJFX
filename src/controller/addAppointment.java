@@ -2,6 +2,7 @@ package controller;
 
 import database.DBAppointments;
 import database.DBContacts;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -92,6 +93,34 @@ public class addAppointment implements Initializable {
                 alert.showAndWait();
                 return;
             }
+
+            //check overlap
+            for (Appointments a : DBAppointments.getAllAppointments()){
+                if (customerId == a.getCustomerId()){
+                    if ((localStart.isAfter(a.getStart().toLocalDateTime()) || localStart.isEqual(a.getStart().toLocalDateTime())) &&  (localStart.isBefore(a.getEnd().toLocalDateTime()))){
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Warning Dialog");
+                        alert.setContentText("The provided time starts within a scheduled appointment. Please select another time");
+                        alert.showAndWait();
+                        return;
+                    }
+                    if (localEnd.isAfter(a.getStart().toLocalDateTime()) && ((localEnd.isBefore(a.getEnd().toLocalDateTime()) || localEnd.isEqual(a.getEnd().toLocalDateTime())))){
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Warning Dialog");
+                        alert.setContentText("The provided time overlaps with a scheduled appointment. Please select another time");
+                        alert.showAndWait();
+                        return;
+                    }
+                    if ((localStart.isBefore(a.getStart().toLocalDateTime()) || localStart.isEqual(a.getStart().toLocalDateTime())) && ((localEnd.isAfter(a.getEnd().toLocalDateTime())) || localEnd.isEqual(a.getEnd().toLocalDateTime()))){
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Warning Dialog");
+                        alert.setContentText("The provided time overlaps with a scheduled appointment. Please select another time");
+                        alert.showAndWait();
+                        return;
+                    }
+                }
+            }
+
             Timestamp startTs = Timestamp.valueOf(localStart);
             Timestamp endTs = Timestamp.valueOf(localEnd);
 
