@@ -24,6 +24,8 @@ import model.Customers;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -80,6 +82,16 @@ public class mainController implements Initializable {
 
     public void exit(ActionEvent actionEvent) {
         Platform.exit();
+    }
+
+    public void alertAppointment(int id){
+        for (Appointments a : DBAppointments.getAllAppointments()){
+            long time = ChronoUnit.MINUTES.between(LocalTime.now(), a.getStart().toLocalDateTime().toLocalTime());
+            if ((time > 0 && time <= 15) && id == a.getUserId()){
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Upcoming appointment " + a.getId() + " on " + a.getStart().toLocalDateTime().toLocalDate() + "at" + a.getStart().toLocalDateTime().toLocalTime());
+                Optional<ButtonType> results = alert.showAndWait();
+            }
+        }
     }
 
     public void deleteCustomer(ActionEvent actionEvent) throws SQLException, IOException {

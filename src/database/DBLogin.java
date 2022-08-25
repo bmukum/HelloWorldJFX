@@ -5,10 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBLogin {
-    public static boolean checkLogin(String username, String password) throws SQLException {
-        String sql = "SELECT User_Name, Password FROM users WHERE User_Name = ? AND Password = ?" ;
+    public static boolean checkLogin(int id, String password) throws SQLException {
+        String sql = "SELECT User_ID, Password FROM users WHERE User_ID = ? AND Password = ?" ;
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-        ps.setString(1, username);
+        ps.setInt(1, id);
         ps.setString(2, password);
         ResultSet rs = ps.executeQuery();
 

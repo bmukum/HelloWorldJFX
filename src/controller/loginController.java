@@ -1,6 +1,7 @@
 package controller;
 
 import database.DBLogin;
+import database.DBUsers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,10 +12,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Users;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class loginController implements Initializable {
@@ -26,41 +34,47 @@ public class loginController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         ZoneId zoneId = ZoneId.systemDefault();
+        //Locale.setDefault(new Locale("fr"));launch
+
         location.setText(zoneId.getId());
 
     }
 
     public void Login(ActionEvent actionEvent) throws IOException {
-//        try {
-//
-//            String username = usernameTF.getText();
-//            String password = passwordTF.getText();
-//            if (DBLogin.checkLogin(username, password) == true){
-//                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
-//                Parent root = loader.load();
+        try {
 
-//                Stage addPartStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-//                Scene addPartScene = new Scene(root, 1300, 690);
-//                addPartStage.setTitle("Main Screen");
-//                addPartStage.setScene(addPartScene);
-//                addPartStage.show();
-//            }
-//            else if (DBLogin.checkLogin(username, password) == false){
-//                Alert alert = new Alert(Alert.AlertType.WARNING);
-//                alert.setTitle("Warning Dialog");
-//                alert.setContentText("Username or password is wrong. Please double-check!");
-//                alert.showAndWait();
-//                return;
-//            }
+        String file = "src/login_activity.txt";
+
+        FileWriter fw = new FileWriter(file, true);
+        PrintWriter outFile = new PrintWriter(fw);
+
+        int id = Integer.parseInt(usernameTF.getText());
+        String password = passwordTF.getText();
+        if (DBLogin.checkLogin(id, password) == true){
+            outFile.println("UserID: " + id + " login successful on " + LocalDate.now() + " at " + LocalTime.now());
+            outFile.close();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
             Parent root = loader.load();
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root, 1300, 690);
-            stage.setTitle("Main Screen");
-            stage.setScene(scene);
-            stage.show();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+            mainController mc = loader.getController();
+            mc.alertAppointment(id);
+
+            Stage addPartStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene addPartScene = new Scene(root, 1300, 690);
+            addPartStage.setTitle("Main Screen");
+            addPartStage.setScene(addPartScene);
+            addPartStage.show();
+        }
+        else if (DBLogin.checkLogin(id, password) == false) {
+            outFile.println("UserID: " + id + " login failed on " + LocalDate.now() + " at " + LocalTime.now());
+            outFile.close();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("Username or password is wrong. Please double-check!");alert.showAndWait();
+            return;
+        }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }
+

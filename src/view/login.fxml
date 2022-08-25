@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="624.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.loginController">
    <children>
-      <Label layoutX="152.0" layoutY="175.0" text="Username" />
+      <Label layoutX="152.0" layoutY="175.0" text="ID" />
       <Label layoutX="152.0" layoutY="212.0" text="Password" />
       <Label layoutX="59.0" layoutY="53.0" text="Login">
          <font>
