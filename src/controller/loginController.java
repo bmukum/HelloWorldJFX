@@ -39,7 +39,7 @@ public class loginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ZoneId zoneId = ZoneId.systemDefault();
-        Locale.setDefault(new Locale("fr"));
+        //Locale.setDefault(new Locale("fr"));
         ResourceBundle rb = ResourceBundle.getBundle("utilities/resource_bundle", Locale.getDefault());
         if (Locale.getDefault().getLanguage().equals("fr")){
             loginTitle.setText(rb.getString("Login"));
@@ -50,10 +50,15 @@ public class loginController implements Initializable {
             location.setText(zoneId.getId());
         }
 
+        if (Locale.getDefault().getLanguage().equals("en")){
+
+        }
+
     }
 
     public void Login(ActionEvent actionEvent) throws IOException {
         try {
+        ResourceBundle rb = ResourceBundle.getBundle("utilities/resource_bundle", Locale.getDefault());
 
         String file = "src/login_activity.txt";
 
@@ -89,7 +94,7 @@ public class loginController implements Initializable {
             outFile.close();
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
-            alert.setContentText("Username or password is wrong. Please double-check!");alert.showAndWait();
+            alert.setContentText(rb.getString("loginerror"));alert.showAndWait();
             return;
         }
         } catch(Exception e) {
