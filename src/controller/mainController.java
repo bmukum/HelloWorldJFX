@@ -5,6 +5,7 @@ import database.DBContacts;
 import database.DBCustomers;
 import javafx.application.Platform;
 import javafx.beans.Observable;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,7 @@ import model.Customers;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
@@ -235,16 +237,59 @@ public class mainController implements Initializable {
     }
 
     public void monthRadioButton(ActionEvent actionEvent) {
-        //implement the filter
+        try {
+            ObservableList<Appointments> allAppointments = DBAppointments.getAllAppointments();
+            ObservableList<Appointments> appointmentsByMonth = FXCollections.observableArrayList();
+
+            LocalDateTime thisMonth = LocalDateTime.now().minusMonths(1);
+            LocalDateTime monthEnd = LocalDateTime.now().plusMonths(1);
+
+            //LAMBDA 1
+            if (allAppointments != null)
+                allAppointments.forEach(a -> {
+                    if (a.getEnd().toLocalDateTime().isAfter(thisMonth) && a.getEnd().toLocalDateTime().isBefore(monthEnd)) {
+                        appointmentsByMonth.add(a);
+                    }
+                    apptTableView.setItems(appointmentsByMonth);
+                });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void weekRadioButton(ActionEvent actionEvent) {
-        //implement the filter
+        try {
+            ObservableList<Appointments> allAppointments = DBAppointments.getAllAppointments();
+            ObservableList<Appointments> appointmentsByWeek = FXCollections.observableArrayList();
+
+            LocalDateTime thisWeek = LocalDateTime.now().minusMonths(1);
+            LocalDateTime wkend = LocalDateTime.now().plusMonths(1);
+
+            //LAMBDA 2
+            if (allAppointments != null)
+                allAppointments.forEach(a -> {
+                    if (a.getEnd().toLocalDateTime().isAfter(thisWeek) && a.getEnd().toLocalDateTime().isBefore(wkend)) {
+                        appointmentsByWeek.add(a);
+                    }
+                    apptTableView.setItems(appointmentsByWeek);
+                });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void seeReports(ActionEvent actionEvent) {
     }
 
     public void viewAll(ActionEvent actionEvent) {
+        try {
+            ObservableList<Appointments> allAppointments = DBAppointments.getAllAppointments();
+            if (allAppointments != null)
+                for (Appointments a : allAppointments) {
+                    apptTableView.setItems(allAppointments);
+                }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

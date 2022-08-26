@@ -62,6 +62,6 @@
       <RadioButton layoutX="200.0" layoutY="316.0" mnemonicParsing="false" onAction="#weekRadioButton" text="View Appointments by week" toggleGroup="$tg" />
       <Button layoutX="361.0" layoutY="570.0" mnemonicParsing="false" onAction="#seeReports" text="See reports" />
       <Label layoutX="336.0" layoutY="545.0" prefHeight="25.0" prefWidth="142.0" text="Your reports are ready!" />
-      <RadioButton layoutX="390.0" layoutY="316.0" mnemonicParsing="false" onAction="#viewAll" selected="true" text="View All" toggleGroup="$tg" />
+      <RadioButton layoutX="390.0" layoutY="316.0" mnemonicParsing="false" onAction="#viewAll" selected="true" text="View All Appointments" toggleGroup="$tg" />
    </children>
 </AnchorPane>

@@ -49,11 +49,6 @@ public class loginController implements Initializable {
             exit.setText(rb.getString("Exit"));
             location.setText(zoneId.getId());
         }
-
-        if (Locale.getDefault().getLanguage().equals("en")){
-
-        }
-
     }
 
     public void Login(ActionEvent actionEvent) throws IOException {
