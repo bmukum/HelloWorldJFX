@@ -215,7 +215,7 @@ public class mainController implements Initializable {
         if (selectedAppointment == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
-            alert.setContentText("Please select an appointment to delete.");
+            alert.setContentText("Please select an appointment to delete!");
             alert.showAndWait();
             return;
         }
