@@ -2,6 +2,7 @@ package controller;
 
 import database.DBLogin;
 import database.DBUsers;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,14 +30,25 @@ public class loginController implements Initializable {
     public Label location;
     public TextField usernameTF;
     public TextField passwordTF;
+    public Button exit;
+    public Button loginButton;
+    public Label loginTitle;
+    public Label password;
+    public Label username;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         ZoneId zoneId = ZoneId.systemDefault();
-        //Locale.setDefault(new Locale("fr"));launch
-
-        location.setText(zoneId.getId());
+        Locale.setDefault(new Locale("fr"));
+        ResourceBundle rb = ResourceBundle.getBundle("utilities/resource_bundle", Locale.getDefault());
+        if (Locale.getDefault().getLanguage().equals("fr")){
+            loginTitle.setText(rb.getString("Login"));
+            username.setText(rb.getString("username"));
+            password.setText(rb.getString("password"));
+            loginButton.setText(rb.getString("Login"));
+            exit.setText(rb.getString("Exit"));
+            location.setText(zoneId.getId());
+        }
 
     }
 
@@ -48,9 +60,17 @@ public class loginController implements Initializable {
         FileWriter fw = new FileWriter(file, true);
         PrintWriter outFile = new PrintWriter(fw);
 
-        int id = Integer.parseInt(usernameTF.getText());
+        String username = usernameTF.getText();
         String password = passwordTF.getText();
-        if (DBLogin.checkLogin(id, password) == true){
+        int id = 0;
+        for (Users u : DBUsers.getAllUsers()){
+            if (u.getUserName() == username) {
+                id = u.getId();
+            }
+        }
+
+        if (DBLogin.checkLogin(username, password) == true){
+
             outFile.println("UserID: " + id + " login successful on " + LocalDate.now() + " at " + LocalTime.now());
             outFile.close();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
@@ -64,7 +84,7 @@ public class loginController implements Initializable {
             addPartStage.setScene(addPartScene);
             addPartStage.show();
         }
-        else if (DBLogin.checkLogin(id, password) == false) {
+        else if (DBLogin.checkLogin(username, password) == false) {
             outFile.println("UserID: " + id + " login failed on " + LocalDate.now() + " at " + LocalTime.now());
             outFile.close();
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -75,6 +95,10 @@ public class loginController implements Initializable {
         } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void exit(ActionEvent actionEvent) {
+        Platform.exit();
     }
 }
 

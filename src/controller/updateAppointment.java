@@ -32,7 +32,7 @@ public class updateAppointment implements Initializable {
     public TextField descTF;
     public TextField locationTF;
     public TextField typeTF;
-    public ComboBox contactCB;
+    public ComboBox<Contacts> contactCB;
     public TextField customerTF;
     public TextField userTF;
     public TextField endTF;
@@ -57,9 +57,9 @@ public class updateAppointment implements Initializable {
 
         contactCB.setItems(DBContacts.getAllContacts());
         int contactId = apptToModify.getContactId();
-        for (Contacts c : DBContacts.getAllContacts()) {
+        for (Contacts c : contactCB.getItems()) {
             if (c.getId() == contactId){
-                contactCB.setValue(c.getName());
+                contactCB.setValue(c);
             }
         }
 

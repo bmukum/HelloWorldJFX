@@ -85,12 +85,19 @@ public class mainController implements Initializable {
     }
 
     public void alertAppointment(int id){
+        boolean found = false;
         for (Appointments a : DBAppointments.getAllAppointments()){
             long time = ChronoUnit.MINUTES.between(LocalTime.now(), a.getStart().toLocalDateTime().toLocalTime());
             if ((time > 0 && time <= 15) && id == a.getUserId()){
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Upcoming appointment " + a.getId() + " on " + a.getStart().toLocalDateTime().toLocalDate() + "at" + a.getStart().toLocalDateTime().toLocalTime());
+                found = true;
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "You have an upcoming appointment. Appointment ID: " + a.getId() + " on " + a.getStart().toLocalDateTime().toLocalDate() + " at " + a.getStart().toLocalDateTime().toLocalTime());
                 Optional<ButtonType> results = alert.showAndWait();
             }
+
+        }
+        if (!found) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Welcome! You  have no upcoming appointment.");
+            Optional<ButtonType> results = alert.showAndWait();
         }
     }
 
