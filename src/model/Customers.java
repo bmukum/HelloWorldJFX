@@ -41,4 +41,9 @@ public class Customers {
     public String getCountry(){
         return country;
     }
+
+    @Override
+    public String toString (){
+        return name;
+    }
 }

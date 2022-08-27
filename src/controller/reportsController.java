@@ -1,8 +1,10 @@
 package controller;
 
+import com.mysql.cj.protocol.a.MysqlBinaryValueDecoder;
 import database.DBAppointments;
 import database.DBContacts;
 import database.DBCountries;
+import database.DBCustomers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +20,7 @@ import model.*;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Calendar;
 import java.util.Collection;
@@ -49,6 +52,11 @@ public class reportsController implements Initializable {
     public TableColumn monthCol;
     public TableColumn contactEndCol;
     public TableColumn CustomerIdCol;
+    public TableView customerTableView;
+    public TableColumn apptIdCol;
+    public ComboBox customerCB;
+    public TableColumn contactCol;
+    public TableColumn startDateCol;
 
     public void back(ActionEvent actionEvent) {
         try {
@@ -69,9 +77,11 @@ public class reportsController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             ObservableList<Contacts> allContacts = DBContacts.getAllContacts();
-            ObservableList<Divisions> divisions = FXCollections.observableArrayList();
+            ObservableList<Customers> allCustomers = DBCustomers.getAllCustomers();
             contactCB.setItems(allContacts);
             contactCB.setPromptText("Select the contact");
+            customerCB.setItems(allCustomers);
+            customerCB.setPromptText("Select a customer");
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -138,6 +148,14 @@ public class reportsController implements Initializable {
             System.out.println(a.getEnd());
             return false;
         });
+
+        if (contactAppts == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("This contact has nothing scheduled yet!");
+            alert.showAndWait();
+            return;
+        }
         contactTableView.setItems(contactAppts);
         ContactIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         cTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -146,5 +164,32 @@ public class reportsController implements Initializable {
         cStartCol.setCellValueFactory(new PropertyValueFactory<>("start"));
         contactEndCol.setCellValueFactory(new PropertyValueFactory<>("end"));
         cCustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+    }
+
+    public void onCustomerCB(ActionEvent actionEvent) {
+        Customers c = (Customers) customerCB.getSelectionModel().getSelectedItem();
+        int customerId = c.getId();
+
+        ObservableList<Appointments> ca = FXCollections.observableArrayList();
+        ObservableList<Appointments> allAppts = DBAppointments.getAllAppointments();
+        ObservableList<Appointments> myReport = FXCollections.observableArrayList();
+
+        for (Appointments a : allAppts){
+            if ((a.getCustomerId() == customerId) && a.getStart().toLocalDateTime().isAfter(LocalDateTime.now())){
+                ca.add(a);
+            }
+        }
+
+        customerTableView.setItems(ca);
+        apptIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        contactCol.setCellValueFactory(new PropertyValueFactory<>("contactId"));
+        startDateCol.setCellValueFactory(new PropertyValueFactory<>("start"));
+        if (ca == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("The selected customer has no future appointments.");
+            alert.showAndWait();
+            return;
+        }
     }
 }
