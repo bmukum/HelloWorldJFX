@@ -279,6 +279,19 @@ public class mainController implements Initializable {
     }
 
     public void seeReports(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/reports.fxml"));
+            Parent root = loader.load();
+
+            Stage addPartStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            Scene addPartScene = new Scene(root, 1100, 690);
+            addPartStage.setTitle("Add Appointment");
+            addPartStage.setScene(addPartScene);
+            addPartStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void viewAll(ActionEvent actionEvent) {

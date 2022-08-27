@@ -10,6 +10,7 @@ public class typeReport {
         this.total = total;
     }
 
+
     public String getType() {
         return type;
     }
