@@ -225,6 +225,9 @@ public class mainController implements Initializable {
         if(results.isPresent() && results.get() == ButtonType.OK) {
             DBAppointments.delete(selectedAppointment.getId());
         }
+        Alert deleteAlert = new Alert(Alert.AlertType.CONFIRMATION, "Appointment ID: " + selectedAppointment.getId() + " of type "+ selectedAppointment.getType() + " has been successfully cancelled");
+        Optional<ButtonType> r = alert.showAndWait();
+
 
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/main.fxml"));

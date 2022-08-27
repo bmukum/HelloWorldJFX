@@ -22,6 +22,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.*;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
@@ -77,6 +78,16 @@ public class addAppointment implements Initializable {
 
             ZonedDateTime estOpenToLocal = estOpenHour.withZoneSameInstant(localZoneId);
             ZonedDateTime estCloseToLocal = estCloseHour.withZoneSameInstant(localZoneId);
+
+            ZonedDateTime startToEst = localStart.atZone(estZone);
+
+            if (startToEst.getDayOfWeek().getValue() == 6 || startToEst.getDayOfWeek().getValue() == 7){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("Please select a weekday.");
+                alert.showAndWait();
+                return;
+            }
 
             if (startLocalTime.isBefore(estOpenToLocal.toLocalTime())) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);

@@ -114,6 +114,16 @@ public class updateAppointment implements Initializable {
             ZonedDateTime estOpenToLocal = estOpenHour.withZoneSameInstant(localZoneId);
             ZonedDateTime estCloseToLocal = estCloseHour.withZoneSameInstant(localZoneId);
 
+            ZonedDateTime startToEst = localStart.atZone(estZone);
+
+            if (startToEst.getDayOfWeek().getValue() == 6 || startToEst.getDayOfWeek().getValue() == 7){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("Please select a weekday.");
+                alert.showAndWait();
+                return;
+            }
+
             if (startLocalTime.isBefore(estOpenToLocal.toLocalTime())) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");

@@ -146,15 +146,5 @@ public class reportsController implements Initializable {
         cStartCol.setCellValueFactory(new PropertyValueFactory<>("start"));
         contactEndCol.setCellValueFactory(new PropertyValueFactory<>("end"));
         cCustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
-
-
-
-    }
-
-    public void viewByType(ActionEvent actionEvent) {
-
-    }
-
-    public void viewByMonth(ActionEvent actionEvent) {
     }
 }
