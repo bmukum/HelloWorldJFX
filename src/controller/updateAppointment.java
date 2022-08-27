@@ -116,6 +116,15 @@ public class updateAppointment implements Initializable {
 
             ZonedDateTime startToEst = localStart.atZone(estZone);
 
+            if ((localStart.isBefore(LocalDateTime.now()) || localEnd.isBefore(localStart))){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("Appointment cannot be in the past, and end time cannot be before start time.");
+                alert.showAndWait();
+                return;
+
+            }
+
             if (startToEst.getDayOfWeek().getValue() == 6 || startToEst.getDayOfWeek().getValue() == 7){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
@@ -182,6 +191,11 @@ public class updateAppointment implements Initializable {
 
         } catch (Exception e) {
             e.printStackTrace();
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setContentText("Please put in valid values in each field.");
+            alert.showAndWait();
         }
     }
 }

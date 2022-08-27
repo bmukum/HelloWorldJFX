@@ -89,6 +89,15 @@ public class addAppointment implements Initializable {
                 return;
             }
 
+            if ((localStart.isBefore(LocalDateTime.now()) || localEnd.isBefore(localStart))){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("Appointment cannot be in the past, and end time cannot be before start time.");
+                alert.showAndWait();
+                return;
+
+            }
+
             if (startLocalTime.isBefore(estOpenToLocal.toLocalTime())) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
@@ -147,6 +156,11 @@ public class addAppointment implements Initializable {
 
         } catch (Exception e) {
             e.printStackTrace();
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setContentText("Please put in valid values in each field.");
+            alert.showAndWait();
         }
     }
 

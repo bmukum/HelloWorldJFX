@@ -11,10 +11,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Contacts;
 import model.Countries;
 import model.Customers;
 import model.Divisions;
@@ -42,12 +44,12 @@ public class updateCustomer implements Initializable {
 
     public void loadCustomerInfo(Customers customer) throws SQLException {
         customerToModify = customer;
-        String id = Integer.toString(customer.getId());
+        String id = Integer.toString(customerToModify.getId());
         idTF.setText(id);
-        nameTF.setText(customer.getName());
-        addressTF.setText(customer.getAddress());
-        postalCodeTF.setText(customer.getPostalCode());
-        phoneTF.setText(customer.getPhone());
+        nameTF.setText(customerToModify.getName());
+        addressTF.setText(customerToModify.getAddress());
+        postalCodeTF.setText(customerToModify.getPostalCode());
+        phoneTF.setText(customerToModify.getPhone());
 
         countryCB.setItems(DBCountries.getAllCountries());
         countryCB.setValue(customerToModify.getCountry());
@@ -55,15 +57,17 @@ public class updateCustomer implements Initializable {
         stateTF.setItems(DBFirstLevelDivisions.getAllFirstLevelDivisions());
         stateTF.setValue(customerToModify.getDivision());
 
-//        if (c.getId() == 1){
-//            stateLabel.setText("State");
-//        }
-//        else if (c.getId() == 2){
-//            stateLabel.setText("Constituent Country");
-//        }
-//        else {
-//            stateLabel.setText("Province");
-//        }
+        if (customerToModify.getCountry() == "U.S"){
+            stateLabel.setText("State");
+
+        }
+        else if (customerToModify.getCountry() == "UK" ){
+            stateLabel.setText("Constituent Country");
+        }
+
+        else {
+            stateLabel.setText("Province");
+        }
     }
 
     public void save(ActionEvent actionEvent) {
@@ -89,6 +93,11 @@ public class updateCustomer implements Initializable {
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setContentText("Please put in valid values in each field.");
+            alert.showAndWait();
         }
     }
 
