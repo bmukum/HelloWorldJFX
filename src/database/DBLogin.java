@@ -21,7 +21,7 @@ public class DBLogin {
      * @return a boolean of true of false depending on whether the pair of credentials are correct.
      */
     public static boolean checkLogin(String username, String password) throws SQLException {
-        String sql = "SELECT User_Name, Password FROM users WHERE User_Name = ? AND Password = ?" ;
+        String sql = "SELECT User_ID, User_Name, Password FROM users WHERE User_Name = ? AND Password = ?" ;
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
         ps.setString(1, username);
         ps.setString(2, password);
@@ -39,4 +39,21 @@ public class DBLogin {
         }
         return checked;
     }
+
+    public static int getUserId(String username, String password) throws SQLException {
+        int id = 0;
+        String sql = "SELECT User_ID, User_Name, Password FROM users WHERE User_Name = ?";
+        PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+        ps.setString(1, username);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        if (rs.getString("User_Name").equals(username)) {
+                id = rs.getInt("User_ID");
+        }
+        return id;
+    }
 }
+
+
+
+

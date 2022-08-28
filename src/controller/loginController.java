@@ -63,6 +63,20 @@ public class loginController implements Initializable {
     }
 
     /**
+     * @return id of the user
+     * @param username is the username of the user logging in.
+     */
+    int id = 0;
+    public int getUserId(String username) throws SQLException {
+        for (Users u : DBUsers.getAllUsers()) {
+            if (u.getUserName() == username) {
+                int id = u.getId();
+            }
+        }
+        return id;
+    }
+
+    /**
      * Method that gets the username and password and check for its correctness with the database. It either logs in the user if the username/password combination is correct or returns an error message if it's wrong.
      * It also records successful or failed login attempts to a file at the root of the project.
      */
@@ -77,16 +91,11 @@ public class loginController implements Initializable {
 
         String username = usernameTF.getText();
         String password = passwordTF.getText();
-        int id = 0;
-        for (Users u : DBUsers.getAllUsers()){
-            if (u.getUserName() == username) {
-                id = u.getId();
-            }
-        }
+        int id = DBLogin.getUserId(username, password);
 
         if (DBLogin.checkLogin(username, password) == true){
 
-            outFile.println("UserID: " + id + " login successful on " + LocalDate.now() + " at " + LocalTime.now());
+            outFile.println("User: " + username + " with id " + id + " login successful on " + LocalDate.now() + " at " + LocalTime.now());
             outFile.close();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
             Parent root = loader.load();
@@ -100,7 +109,7 @@ public class loginController implements Initializable {
             addPartStage.show();
         }
         else if (DBLogin.checkLogin(username, password) == false) {
-            outFile.println("UserID: " + id + " login failed on " + LocalDate.now() + " at " + LocalTime.now());
+            outFile.println("User: " + username + " with id " + id + " login failed on " + LocalDate.now() + " at " + LocalTime.now());
             outFile.close();
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
