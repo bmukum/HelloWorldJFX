@@ -218,15 +218,19 @@ public class mainController implements Initializable {
             alert.setContentText("Please select an appointment to delete!");
             alert.showAndWait();
             return;
-        }
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will delete the selected appointment!");
-        Optional<ButtonType> results = alert.showAndWait();
 
-        if(results.isPresent() && results.get() == ButtonType.OK) {
-            DBAppointments.delete(selectedAppointment.getId());
-            Alert deleteAlert = new Alert(Alert.AlertType.CONFIRMATION, "Appointment ID: " + selectedAppointment.getId() + " of type "+ selectedAppointment.getType() + " has been successfully cancelled");
-            Optional<ButtonType> r = alert.showAndWait();
         }
+        else {
+            System.out.println("Alert");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "This will delete the selected appointment!");
+            Optional<ButtonType> results = alert.showAndWait();
+
+            if(results.isPresent() && results.get() == ButtonType.OK) {
+                DBAppointments.delete(selectedAppointment.getId());
+                Alert deleteAlert = new Alert(Alert.AlertType.WARNING);
+                deleteAlert.setContentText("Appointment ID " + selectedAppointment.getId() + " of type " + selectedAppointment.getType() + " has been cancelled");
+                deleteAlert.showAndWait();
+            }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
         Parent root = loader.load();
@@ -235,6 +239,7 @@ public class mainController implements Initializable {
         stage.setTitle("Main Screen");
         stage.setScene(scene);
         stage.show();
+        }
     }
 
     public void monthRadioButton(ActionEvent actionEvent) {

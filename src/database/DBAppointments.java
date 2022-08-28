@@ -30,6 +30,7 @@ public abstract class DBAppointments {
                 int customerId = rs.getInt("Customer_ID");
                 int userId = rs.getInt("User_ID");
                 int contactId = rs.getInt("Contact_ID");
+                System.out.println(customerId);
                 Appointments appt = new Appointments(id, title, description, location, type, contactId, start, end, customerId, userId);
                 apptList.add(appt);
 

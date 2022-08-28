@@ -50,7 +50,7 @@
             <TableColumn fx:id="startDateCol" prefWidth="154.0" text="Start " />
         </columns>
       </TableView>
-      <Label layoutX="13.0" layoutY="410.0" prefHeight="25.0" prefWidth="416.0" text="Select a customer to get future appointment and contact ID" />
+      <Label layoutX="13.0" layoutY="410.0" prefHeight="25.0" prefWidth="587.0" text="Do you want to see a customer's future appointment and who the associated contact is? Select the customer" />
       <ComboBox fx:id="customerCB" layoutX="46.0" layoutY="435.0" onAction="#onCustomerCB" prefWidth="150.0" />
    </children>
 </AnchorPane>

@@ -46,7 +46,6 @@ public class reportsController implements Initializable {
     public TableView contactTableView;
     public TableColumn cTypeCol;
     public TableColumn CEndCol;
-    public TableColumn cCustomerIdCol;
     public ToggleGroup tg;
     public TableView monthTableView;
     public TableColumn monthCol;
@@ -131,6 +130,14 @@ public class reportsController implements Initializable {
         monthTableView.setItems(reportByMonth);
         monthCol.setCellValueFactory(new PropertyValueFactory<>("month"));
         mTotalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
+//
+//        if (ca.isEmpty()){
+//            Alert alert = new Alert(Alert.AlertType.WARNING);
+//            alert.setTitle("Warning Dialog");
+//            alert.setContentText("The selected customer has no future appointments.");
+//            alert.showAndWait();
+//            return;
+//        }
     }
 
 
@@ -145,16 +152,14 @@ public class reportsController implements Initializable {
         ObservableList<Appointments> contactAppts = allAppts.filtered(a->{
             if (a.getContactId() == contactId)
                 return true;
-            System.out.println(a.getEnd());
             return false;
         });
 
-        if (contactAppts == null){
+        if (contactAppts.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
             alert.setContentText("This contact has nothing scheduled yet!");
             alert.showAndWait();
-            return;
         }
         contactTableView.setItems(contactAppts);
         ContactIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -163,7 +168,7 @@ public class reportsController implements Initializable {
         cDescCol.setCellValueFactory(new PropertyValueFactory<>("description"));
         cStartCol.setCellValueFactory(new PropertyValueFactory<>("start"));
         contactEndCol.setCellValueFactory(new PropertyValueFactory<>("end"));
-        cCustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        CustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
     }
 
     public void onCustomerCB(ActionEvent actionEvent) {
@@ -184,12 +189,11 @@ public class reportsController implements Initializable {
         apptIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         contactCol.setCellValueFactory(new PropertyValueFactory<>("contactId"));
         startDateCol.setCellValueFactory(new PropertyValueFactory<>("start"));
-        if (ca == null){
+        if (ca.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
             alert.setContentText("The selected customer has no future appointments.");
             alert.showAndWait();
-            return;
         }
     }
 }
