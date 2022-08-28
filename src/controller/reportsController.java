@@ -147,14 +147,6 @@ public class reportsController implements Initializable {
         monthTableView.setItems(reportByMonth);
         monthCol.setCellValueFactory(new PropertyValueFactory<>("month"));
         mTotalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
-//
-//        if (ca.isEmpty()){
-//            Alert alert = new Alert(Alert.AlertType.WARNING);
-//            alert.setTitle("Warning Dialog");
-//            alert.setContentText("The selected customer has no future appointments.");
-//            alert.showAndWait();
-//            return;
-//        }
     }
 
 
