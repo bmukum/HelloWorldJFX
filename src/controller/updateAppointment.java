@@ -140,7 +140,7 @@ public class updateAppointment implements Initializable {
             if ((localStart.isBefore(LocalDateTime.now()) || localEnd.isBefore(localStart))){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
-                alert.setContentText("Appointment cannot be in the past, and end time cannot be before start time.");
+                alert.setContentText("Your appointment is either in the past, or your end time is before the start. Please check again.");
                 alert.showAndWait();
                 return;
 
@@ -157,7 +157,7 @@ public class updateAppointment implements Initializable {
             if (startLocalTime.isBefore(estOpenToLocal.toLocalTime())) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
-                alert.setContentText("Please enter a time after 8:00 am EST.");
+                alert.setContentText("Please enter a time on or after 8:00 am EST.");
                 alert.showAndWait();
                 return;
             }

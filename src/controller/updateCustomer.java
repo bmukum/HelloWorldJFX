@@ -34,8 +34,8 @@ import java.util.ResourceBundle;
  * @author Brandon Mukum
  */
 public class updateCustomer implements Initializable {
-    public ComboBox countryCB;
-    public ComboBox stateTF;
+    public ComboBox<Countries> countryCB;
+    public ComboBox<Divisions> stateTF;
     public TextField idTF;
     public TextField nameTF;
     public TextField addressTF;
@@ -58,18 +58,26 @@ public class updateCustomer implements Initializable {
      */
     public void loadCustomerInfo(Customers customer) throws SQLException {
         customerToModify = customer;
-        String id = Integer.toString(customerToModify.getId());
+        String id = Integer.toString(customer.getId());
         idTF.setText(id);
-        nameTF.setText(customerToModify.getName());
-        addressTF.setText(customerToModify.getAddress());
-        postalCodeTF.setText(customerToModify.getPostalCode());
-        phoneTF.setText(customerToModify.getPhone());
+        nameTF.setText(customer.getName());
+        addressTF.setText(customer.getAddress());
+        postalCodeTF.setText(customer.getPostalCode());
+        phoneTF.setText(customer.getPhone());
 
         countryCB.setItems(DBCountries.getAllCountries());
-        countryCB.setValue(customerToModify.getCountry());
+        for (Countries c : countryCB.getItems()){
+            if (c.getName() == customerToModify.getCountry()){
+                countryCB.setValue(c);
+            }
+        }
 
         stateTF.setItems(DBFirstLevelDivisions.getAllFirstLevelDivisions());
-        stateTF.setValue(customerToModify.getDivision());
+        for (Divisions d : stateTF.getItems()){
+            if (d.getDivision() == customerToModify.getDivision()){
+                stateTF.setValue(d);
+            }
+        }
 
         if (customerToModify.getCountry() == "U.S"){
             stateLabel.setText("State");
