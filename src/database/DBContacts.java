@@ -9,7 +9,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Class for database class that works with contact records.
+ */
+
+/**
+ *
+ * @author Brandon Mukum
+ */
 public class DBContacts {
+
+    /**
+     * @return the list of all contacts in the database.
+     */
     public static ObservableList<Contacts> getAllContacts() throws SQLException {
         ObservableList<Contacts> contactList = FXCollections.observableArrayList();
         try {

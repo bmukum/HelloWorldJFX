@@ -1,5 +1,12 @@
 package model;
+/**
+ * month report class
+ */
 
+/**
+ *
+ * @author Brandon Mukum
+ */
 public class monthReport {
     private String month;
     private int total;
@@ -11,11 +18,17 @@ public class monthReport {
     }
 
 
+    /**
+     * @return the month
+     */
     public String getMonth() {
 
         return month;
     }
 
+    /**
+     * @return the total
+     */
     public int getTotal() {
 
         return total;

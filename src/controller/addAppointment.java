@@ -27,6 +27,16 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
+
+/**
+ * Controller class for the add appointment menu.
+ */
+
+/**
+ *
+ * @author Brandon Mukum
+ */
+
 public class addAppointment implements Initializable {
     public TextField idTF;
     public TextField titleTF;
@@ -40,6 +50,9 @@ public class addAppointment implements Initializable {
     public TextField startTF;
     public DatePicker dateDP;
 
+    /**
+     * Initialize method
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -50,7 +63,9 @@ public class addAppointment implements Initializable {
         }
 
     }
-
+    /**
+     * Method that saves all the changes to the databse when the save button is clicked.
+     */
     public void save(ActionEvent actionEvent) {
         try {
             String title = titleTF.getText();
@@ -164,6 +179,10 @@ public class addAppointment implements Initializable {
         }
     }
 
+
+    /**
+     * Method that cancels all changes and returns the user back to the main menu.
+     */
     public void cancel(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/main.fxml"));

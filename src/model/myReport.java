@@ -1,5 +1,7 @@
 package model;
-
+/**
+ * my report class
+ */
 public class myReport {
     private int apptId;
     private String contact;
@@ -11,10 +13,16 @@ public class myReport {
     }
 
 
+    /**
+     * @return the appointment id
+     */
     public int getApptId() {
         return apptId;
     }
 
+    /**
+     * @return the contact
+     */
     public String getContact() {
         return contact;
     }
