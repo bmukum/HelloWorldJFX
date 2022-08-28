@@ -6,7 +6,19 @@ import model.Customers;
 
 import java.sql.*;
 
+/**
+ * Class that manipulates records in the customer table.
+ */
+
+/**
+ *
+ * @author Brandon Mukum
+ */
 public abstract class DBCustomers {
+
+    /**
+     * @return the list of all customers
+     */
     public static ObservableList<Customers> getAllCustomers() {
         ObservableList<Customers> customerList = FXCollections.observableArrayList();
         try{
@@ -32,6 +44,14 @@ public abstract class DBCustomers {
         return customerList;
     }
 
+    /**
+     * @param name the name of the customer
+     * @param address the customer's address
+     * @param postalCode the postal code of the customer's address
+     * @param phone the customer's phone number
+     * @param divisionId the state of province of division of the customer
+     * @return the number of rows inserted.
+     */
     public static int insert(String name, String address, String postalCode, String phone, int divisionId) throws SQLException{
         String sql = "INSERT into customers (Customer_Name, Address, Postal_Code, Phone, Division_ID) VALUES(?, ?, ?, ?, ?)";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
@@ -45,6 +65,15 @@ public abstract class DBCustomers {
         return rowsInserted;
     }
 
+    /**
+     * @param name the name of the customer
+     * @param id the id of the customer to modify
+     * @param address the customer's address
+     * @param postalCode the postal code of the customer's address
+     * @param phone the customer's phone number
+     * @param divisionId the state of province of division of the customer
+     * @return the number of rows updated.
+     */
     public static int update(int id,String name, String address, String postalCode, String phone, int divisionId) throws SQLException {
         String sql = "UPDATE customers set Customer_Name = ? , Address = ? , Postal_Code = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
@@ -59,6 +88,10 @@ public abstract class DBCustomers {
         return rowsUpdated;
     }
 
+    /**
+     * @param id the id of the customer to delete.
+     * @return the number of rows deleted.
+     */
     public static int delete(int id) throws SQLException {
         String sql = "DELETE from customers WHERE Customer_ID = ?";
         PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);

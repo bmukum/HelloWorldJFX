@@ -25,6 +25,14 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for the add customer menu.
+ */
+
+/**
+ *
+ * @author Brandon Mukum
+ */
 public class addCustomer implements Initializable {
     public ComboBox countryCB;
     public ComboBox stateTF;
@@ -35,6 +43,9 @@ public class addCustomer implements Initializable {
     public TextField phoneTF;
     public Label stateLabel;
 
+    /**
+     * Initialize method
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -49,6 +60,9 @@ public class addCustomer implements Initializable {
 
     }
 
+    /**R
+     * Method that saves all the changes to the database when the save button is clicked.
+     */
     public void save(ActionEvent actionEvent) {
         try {
             String name = nameTF.getText();
@@ -79,6 +93,9 @@ public class addCustomer implements Initializable {
 
     }
 
+    /**
+     * This method cancels all working changes and goes back to the main screen.
+     */
     public void cancel(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
@@ -94,6 +111,10 @@ public class addCustomer implements Initializable {
         }
     }
 
+    /**
+     * This method gets the chosen country, determines and sets the list of divisions in the divisions combo box.
+     * It also sets the label to state or province depending on the chosen country.
+     */
     public void countryCB(ActionEvent actionEvent) {
         try {
             ObservableList<Divisions> divisionsChoice = FXCollections.observableArrayList();

@@ -26,6 +26,14 @@ import java.time.ZoneId;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for the login menu.
+ */
+
+/**
+ *
+ * @author Brandon Mukum
+ */
 public class loginController implements Initializable {
     public Label location;
     public TextField usernameTF;
@@ -36,6 +44,9 @@ public class loginController implements Initializable {
     public Label password;
     public Label username;
 
+    /**
+     * Initialize method
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ZoneId zoneId = ZoneId.systemDefault();
@@ -51,6 +62,10 @@ public class loginController implements Initializable {
         }
     }
 
+    /**
+     * Method that gets the username and password and check for its correctness with the database. It either logs in the user if the username/password combination is correct or returns an error message if it's wrong.
+     * It also records successful or failed login attempts to a file at the root of the project.
+     */
     public void Login(ActionEvent actionEvent) throws IOException {
         try {
         ResourceBundle rb = ResourceBundle.getBundle("utilities/resource_bundle", Locale.getDefault());
@@ -97,6 +112,9 @@ public class loginController implements Initializable {
         }
     }
 
+    /**
+     * This method quits the application when the exit button is clicked.
+     */
     public void exit(ActionEvent actionEvent) {
         Platform.exit();
     }

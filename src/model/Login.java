@@ -1,5 +1,13 @@
 package model;
 
+/**
+ * Login class
+ */
+
+/**
+ *
+ * @author Brandon Mukum
+ */
 import database.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

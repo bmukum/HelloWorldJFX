@@ -9,7 +9,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Class for working with the users table in the database
+ */
+
+/**
+ *
+ * @author Brandon Mukum
+ */
 public class DBUsers {
+    /**
+     *
+     * @return the list of all users in the database
+     * @throws SQLException
+     */
     public static ObservableList<Users> getAllUsers() throws SQLException {
         ObservableList<Users> userList = FXCollections.observableArrayList();
         try {

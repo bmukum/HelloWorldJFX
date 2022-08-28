@@ -1,5 +1,12 @@
 package model;
+/**
+ * customer class
+ */
 
+/**
+ *
+ * @author Brandon Mukum
+ */
 public class Customers {
     private int id;
     private String name;
@@ -19,29 +26,54 @@ public class Customers {
         this.country = country;
     }
 
+    /**
+     * @return the id
+     */
     public int getId() {
         return id;
     }
+    /**
+     * @return the name
+     */
     public String getName(){
         return name;
     }
+    /**
+     * @return the address
+     */
     public String getAddress(){
         return address;
     }
 
+    /**
+     * @return the postal code
+     */
+
     public String getPostalCode(){
         return postalCode;
     }
+    /**
+     * @return the phone number
+     */
     public String getPhone(){
         return phone;
     }
+    /**
+     * @return the division id
+     */
     public String getDivision() {
         return division;
     }
+    /**
+     * @return the country name
+     */
     public String getCountry(){
         return country;
     }
 
+    /**
+     * @return the customer name as string object
+     */
     @Override
     public String toString (){
         return name;

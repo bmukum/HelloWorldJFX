@@ -28,6 +28,14 @@ import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for the main screen.
+ */
+
+/**
+ *
+ * @author Brandon Mukum
+ */
 public class mainController implements Initializable {
     public TableView customerTableView;
     public TableColumn cIdCol;
@@ -50,6 +58,9 @@ public class mainController implements Initializable {
     public TableColumn cDivisionCol;
     public ToggleGroup tg;
 
+    /**
+     * Initialize method
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -79,7 +90,9 @@ public class mainController implements Initializable {
         aUserIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
 
-
+    /**
+     * Method that exits the application when the exit button is clicked.
+     */
     public void exit(ActionEvent actionEvent) {
         Platform.exit();
     }
@@ -101,6 +114,9 @@ public class mainController implements Initializable {
         }
     }
 
+    /**
+     * This method deletes the selected customer from the database.
+     */
     public void deleteCustomer(ActionEvent actionEvent) throws SQLException, IOException {
         Customers selectedCustomer = (Customers) customerTableView.getSelectionModel().getSelectedItem();
         if (selectedCustomer == null) {
@@ -130,6 +146,9 @@ public class mainController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Method that takes the user to a screen that allows him/her to modify the attributes of a customer in the database.
+     */
     public void updateCustomer(ActionEvent actionEvent) {
         Customers selectedCustomer = (Customers) customerTableView.getSelectionModel().getSelectedItem();
         if (selectedCustomer == null) {
@@ -155,6 +174,9 @@ public class mainController implements Initializable {
         }
     }
 
+    /**
+     * Method that takes the user to the menu that creates a new customer record..
+     */
     public void addCustomer(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/addCustomer.fxml"));
@@ -170,6 +192,9 @@ public class mainController implements Initializable {
         }
     }
 
+    /**
+     * Method that opens up the window to add a customer appointment.
+     */
     public void addAppt(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/addAppointment.fxml"));
@@ -185,6 +210,9 @@ public class mainController implements Initializable {
         }
     }
 
+    /**
+     * This method handles the update button on the appointment table. When clicked, it takes the user to the screen that allows for appointment changes.
+     */
     public void updateAppt(ActionEvent actionEvent) {
         Appointments selectedAppt = (Appointments) apptTableView.getSelectionModel().getSelectedItem();
         if (selectedAppt == null) {
@@ -210,6 +238,9 @@ public class mainController implements Initializable {
         }
     }
 
+    /**
+     * Method that deletes the selected appointment.
+     */
     public void deleteAppt(ActionEvent actionEvent) throws IOException, SQLException {
         Appointments selectedAppointment = (Appointments) apptTableView.getSelectionModel().getSelectedItem();
         if (selectedAppointment == null) {
@@ -242,6 +273,10 @@ public class mainController implements Initializable {
         }
     }
 
+    /**
+     * This method handles the radio button that displays appointments by month.
+     * It also contains Lambda function 1 that iterates through the list of appointments, and get the appointments sorted by month, adds that resylts to a list that is then subsequently set on the table
+     */
     public void monthRadioButton(ActionEvent actionEvent) {
         try {
             ObservableList<Appointments> allAppointments = DBAppointments.getAllAppointments();
@@ -263,6 +298,11 @@ public class mainController implements Initializable {
         }
     }
 
+    /**
+     * This method handles the radio button that displays appointments by week.
+     * It also contains Lambda function 2.
+     * The lambda loops through all appointments and gets those within the same week and sets that to the table.
+     */
     public void weekRadioButton(ActionEvent actionEvent) {
         try {
             ObservableList<Appointments> allAppointments = DBAppointments.getAllAppointments();
@@ -284,6 +324,9 @@ public class mainController implements Initializable {
         }
     }
 
+    /**
+     * The "See reports" button is handled by this method. It takes the user to the screen that allows him/her to see the reports.
+     */
     public void seeReports(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/reports.fxml"));
@@ -300,6 +343,9 @@ public class mainController implements Initializable {
 
     }
 
+    /**
+     * This method is invoked by the view all radio button. When the button is clicked, it sets the appointment table with every appoinments that is not null.
+     */
     public void viewAll(ActionEvent actionEvent) {
         try {
             ObservableList<Appointments> allAppointments = DBAppointments.getAllAppointments();

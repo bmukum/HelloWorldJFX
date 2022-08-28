@@ -25,6 +25,14 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for the update customer menu.
+ */
+
+/**
+ *
+ * @author Brandon Mukum
+ */
 public class updateCustomer implements Initializable {
     public ComboBox countryCB;
     public ComboBox stateTF;
@@ -37,11 +45,17 @@ public class updateCustomer implements Initializable {
 
     private Customers customerToModify = null;
 
+    /**
+     * Initialize method
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
+    /**
+     * This method fills the form with the selected customer's information.
+     */
     public void loadCustomerInfo(Customers customer) throws SQLException {
         customerToModify = customer;
         String id = Integer.toString(customerToModify.getId());
@@ -70,6 +84,9 @@ public class updateCustomer implements Initializable {
         }
     }
 
+    /**
+     * This method collects all changes, runs series of error checks and updates the customer's record in the database if no error is detected.
+     */
     public void save(ActionEvent actionEvent) {
         try {
             int id = customerToModify.getId();
@@ -101,6 +118,9 @@ public class updateCustomer implements Initializable {
         }
     }
 
+    /**
+     * This method returns the user to the main menu without saving any changes.
+     */
     public void cancel(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
@@ -115,6 +135,10 @@ public class updateCustomer implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * This method gets the selected country and fills the division combobox with the appropriate list of divisions.
+     */
 
     public void countryCB(ActionEvent actionEvent) {
         try {

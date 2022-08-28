@@ -27,6 +27,14 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class for the reports screen.
+ */
+
+/**
+ *
+ * @author Brandon Mukum
+ */
 public class reportsController implements Initializable {
     public TableView monthTable;
     public TableColumn mMonthCol;
@@ -57,6 +65,9 @@ public class reportsController implements Initializable {
     public TableColumn contactCol;
     public TableColumn startDateCol;
 
+    /**
+     * This method takes the user back to the main menu when the back button is clicked.
+     */
     public void back(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
@@ -72,6 +83,12 @@ public class reportsController implements Initializable {
         }
     }
 
+    /**
+     * Initialize method
+     * It contains a lambda function that gets input from a stream of different months of the year.
+     * The lambda function 4 uses a stream-map combination that returns the months from the appoiments list and adds it to an allMonths list.
+     * It continues to get input from the allMonths list, filters it, and adds the distinct month to another list.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -141,6 +158,11 @@ public class reportsController implements Initializable {
     }
 
 
+    /**
+     * It contains a lambda function that gets input from a stream of different months of the year.
+     * The lambda function 3 helps to check if a list of appointments have contact IDs that match a selected contact object. It returns true of there's a match and false if there is not.
+     * The resulting list is then set to the table.
+     */
     public void contactSelection(ActionEvent actionEvent) throws SQLException {
         ObservableList<Contacts> allContacts = DBContacts.getAllContacts();
         Contacts c = (Contacts) contactCB.getSelectionModel().getSelectedItem();
@@ -171,6 +193,9 @@ public class reportsController implements Initializable {
         CustomerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
     }
 
+    /**
+     * This method is controlled by the customer comboBox. When a customer is selected, the tables displays all the customer's future appointments, the start data and who the contact for each appointment is.
+     */
     public void onCustomerCB(ActionEvent actionEvent) {
         Customers c = (Customers) customerCB.getSelectionModel().getSelectedItem();
         int customerId = c.getId();

@@ -9,7 +9,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Class for accessing country records in the database
+ */
+
+/**
+ *
+ * @author Brandon Mukum
+ */
 public class DBCountries {
+
+    /**
+     * @return the list of all countries in the database
+     */
     public static ObservableList<Countries> getAllCountries() throws SQLException {
         ObservableList<Countries> countryList = FXCollections.observableArrayList();
         try {

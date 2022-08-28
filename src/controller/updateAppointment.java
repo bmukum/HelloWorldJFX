@@ -26,6 +26,14 @@ import java.time.*;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 
+/**
+ * Controller class for the update appointment menu.
+ */
+
+/**
+ *
+ * @author Brandon Mukum
+ */
 public class updateAppointment implements Initializable {
     public TextField idTF;
     public TextField titleTF;
@@ -41,11 +49,17 @@ public class updateAppointment implements Initializable {
 
     private Appointments apptToModify = null;
 
+    /**
+     * Initialize method
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
+    /**
+     * This method fills the form with information about the selected appointment.
+     */
     public void loadApptInfo(Appointments appt) throws SQLException {
         apptToModify = appt;
         String id = Integer.toString(appt.getId());
@@ -70,6 +84,9 @@ public class updateAppointment implements Initializable {
         userTF.setText(String.valueOf(apptToModify.getUserId()));
     }
 
+    /**
+     * This method discards all changes and returns the user to the main menu.
+     */
     public void cancel (ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
@@ -85,6 +102,10 @@ public class updateAppointment implements Initializable {
         }
     }
 
+    /**
+     * When the save button is clicked, this method gets all changes and updates the appointment record in the database.
+     * It also runs multiple checks against the inputted information to verify logical errors that are not allowed by the business.
+     */
     public void save(ActionEvent actionEvent) {
         try {
             int id = Integer.parseInt(idTF.getText());
