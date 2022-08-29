@@ -37,7 +37,7 @@
       <ComboBox fx:id="contactCB" layoutX="229.0" layoutY="108.0" onAction="#contactSelection" prefHeight="25.0" prefWidth="245.0" />
       <TableView fx:id="monthTableView" layoutX="321.0" layoutY="270.0" prefHeight="118.0" prefWidth="237.0">
          <columns>
-            <TableColumn fx:id="monthCol" prefWidth="114.0" text="Type" />
+            <TableColumn fx:id="monthCol" prefWidth="114.0" text="Month" />
             <TableColumn fx:id="mTotalCol" prefWidth="122.0" text="Total" />
          </columns>
       </TableView>
