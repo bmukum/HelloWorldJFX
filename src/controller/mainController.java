@@ -58,6 +58,7 @@ public class mainController implements Initializable {
     public TableColumn cDivisionCol;
     public ToggleGroup tg;
 
+//    private static ObservableList<int> usDivisionIdArray
     /**
      * Initialize method
      */

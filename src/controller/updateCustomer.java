@@ -67,28 +67,16 @@ public class updateCustomer implements Initializable {
 
         countryCB.setItems(DBCountries.getAllCountries());
         for (Countries c : countryCB.getItems()){
-            if (c.getName() == customerToModify.getCountry()){
+            if (c.getName().equals(customerToModify.getCountry())){
                 countryCB.setValue(c);
             }
         }
 
         stateTF.setItems(DBFirstLevelDivisions.getAllFirstLevelDivisions());
         for (Divisions d : stateTF.getItems()){
-            if (d.getDivision() == customerToModify.getDivision()){
+            if (d.getDivision().equals(customerToModify.getDivision())){
                 stateTF.setValue(d);
             }
-        }
-
-        if (customerToModify.getCountry() == "U.S"){
-            stateLabel.setText("State");
-
-        }
-        else if (customerToModify.getCountry() == "UK" ){
-            stateLabel.setText("Constituent Country");
-        }
-
-        else {
-            stateLabel.setText("Province");
         }
     }
 
