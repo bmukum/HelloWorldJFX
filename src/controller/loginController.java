@@ -50,7 +50,7 @@ public class loginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ZoneId zoneId = ZoneId.systemDefault();
-        //Locale.setDefault(new Locale("fr"));
+        location.setText(zoneId.getId());
         ResourceBundle rb = ResourceBundle.getBundle("utilities/resource_bundle", Locale.getDefault());
         if (Locale.getDefault().getLanguage().equals("fr")){
             loginTitle.setText(rb.getString("Login"));
@@ -58,7 +58,6 @@ public class loginController implements Initializable {
             password.setText(rb.getString("password"));
             loginButton.setText(rb.getString("Login"));
             exit.setText(rb.getString("Exit"));
-            location.setText(zoneId.getId());
         }
     }
 
