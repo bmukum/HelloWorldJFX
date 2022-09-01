@@ -9,12 +9,14 @@ package model;
  * @author Brandon Mukum
  */
 public class typeReport {
+    private Long month;
     private String type;
-    private int total;
+    private Long total;
 
 
-    public typeReport(String type, int total) {
+    public typeReport(String type, Long month, Long total) {
         this.type = type;
+        this.month = month;
         this.total = total;
     }
 
@@ -29,7 +31,10 @@ public class typeReport {
     /**
      * @return the total
      */
-    public int getTotal() {
+    public Long getTotal() {
         return total;
+    }
+    public Long getMonth() {
+        return month;
     }
 }

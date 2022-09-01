@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointments;
 import model.Customers;
+import model.typeReport;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -127,5 +128,25 @@ public abstract class DBAppointments {
 
         int rowsDeleted = ps.executeUpdate();
         return rowsDeleted;
+    }
+
+    /**
+     * @return the list of rows to populate the report table.
+     */
+    public static ObservableList<typeReport> getTypeMonthReport() throws SQLException {
+        ObservableList<typeReport> typeMonthList = FXCollections.observableArrayList();
+            String sql = "Select month(Start) as month, Type, count(*) as Total from appointments GROUP BY Month, Type;";
+
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Long month = rs.getLong("month");
+                String type = rs.getString("Type");
+                Long total = rs.getLong("Total");
+                typeReport typemonth = new typeReport(type, month, total);
+                typeMonthList.add(typemonth);
+            }
+            return typeMonthList;
     }
 }

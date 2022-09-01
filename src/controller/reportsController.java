@@ -94,35 +94,21 @@ public class reportsController implements Initializable {
         try {
             ObservableList<Contacts> allContacts = DBContacts.getAllContacts();
             ObservableList<Customers> allCustomers = DBCustomers.getAllCustomers();
+            ObservableList<typeReport> typeReport = DBAppointments.getTypeMonthReport();
+
             contactCB.setItems(allContacts);
             contactCB.setPromptText("Select the contact");
             customerCB.setItems(allCustomers);
             customerCB.setPromptText("Select a customer");
 
+            tytmTable.setItems(typeReport);
+            tTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+            monthCol.setCellValueFactory(new PropertyValueFactory<>("month"));
+            tTotalColumn.setCellValueFactory(new PropertyValueFactory<>("total"));
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-        ObservableList<String> types = FXCollections.observableArrayList();
-        ObservableList<String> distinctType = FXCollections.observableArrayList();
-
-        ObservableList<typeReport> reportByType = FXCollections.observableArrayList();
-
-        for (Appointments a : DBAppointments.getAllAppointments()) {
-            String type = a.getType();
-            if (!distinctType.contains(type))
-                distinctType.add(type);
-        }
-
-        for (String type : distinctType) {
-            String singleType = type;
-            int total = Collections.frequency(distinctType, singleType);
-            typeReport tr = new typeReport(singleType, total);
-            reportByType.add(tr);
-        }
-        tytmTable.setItems(reportByType);
-        tTypeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-        tTotalColumn.setCellValueFactory(new PropertyValueFactory<>("total"));
 
         //total appointments by month
         ObservableList<Month> allMonths = FXCollections.observableArrayList();
@@ -144,9 +130,6 @@ public class reportsController implements Initializable {
             monthReport mr = new monthReport(month, total);
             reportByMonth.add(mr);
         }
-        monthTableView.setItems(reportByMonth);
-        monthCol.setCellValueFactory(new PropertyValueFactory<>("month"));
-        mTotalCol.setCellValueFactory(new PropertyValueFactory<>("total"));
     }
 
 

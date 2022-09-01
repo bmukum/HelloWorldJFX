@@ -16,10 +16,11 @@
          </font>
       </Label>
       <Button layoutX="664.0" layoutY="527.0" mnemonicParsing="false" onAction="#back" text="Back" />
-      <TableView fx:id="tytmTable" layoutX="11.0" layoutY="270.0" prefHeight="118.0" prefWidth="237.0">
+      <TableView fx:id="tytmTable" layoutX="266.0" layoutY="262.0" prefHeight="118.0" prefWidth="353.0">
         <columns>
           <TableColumn fx:id="tTypeCol" prefWidth="114.0" text="Type" />
-          <TableColumn fx:id="tTotalColumn" prefWidth="122.0" text="Total" />
+          <TableColumn fx:id="monthCol" prefWidth="122.0" text="Month" />
+            <TableColumn fx:id="tTotalColumn" prefWidth="122.0" text="Total" />
         </columns>
       </TableView>
       <Label layoutX="27.0" layoutY="108.0" prefHeight="25.0" prefWidth="205.0" text="Want to check a contact's schedule ?" />
@@ -35,14 +36,7 @@
         </columns>
       </TableView>
       <ComboBox fx:id="contactCB" layoutX="229.0" layoutY="108.0" onAction="#contactSelection" prefHeight="25.0" prefWidth="245.0" />
-      <TableView fx:id="monthTableView" layoutX="321.0" layoutY="270.0" prefHeight="118.0" prefWidth="237.0">
-         <columns>
-            <TableColumn fx:id="monthCol" prefWidth="114.0" text="Month" />
-            <TableColumn fx:id="mTotalCol" prefWidth="122.0" text="Total" />
-         </columns>
-      </TableView>
-      <Label layoutX="13.0" layoutY="245.0" prefHeight="17.0" prefWidth="164.0" text="Total Appointments By Type" />
-      <Label layoutX="321.0" layoutY="245.0" prefHeight="17.0" prefWidth="171.0" text="Total Appointments By Month" />
+      <Label layoutX="288.0" layoutY="237.0" prefHeight="17.0" prefWidth="245.0" text="Total Appointments By Type and month" />
       <TableView fx:id="customerTableView" layoutX="16.0" layoutY="465.0" prefHeight="99.0" prefWidth="463.0">
         <columns>
           <TableColumn fx:id="apptIdCol" prefWidth="154.0" text="Appointment ID" />
