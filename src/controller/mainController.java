@@ -22,11 +22,14 @@ import model.Customers;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.WeekFields;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 /**
  * Controller class for the main screen.
@@ -288,12 +291,9 @@ public class mainController implements Initializable {
 
             //LAMBDA 1
             if (allAppointments != null)
-                allAppointments.forEach(a -> {
-                    if (a.getEnd().toLocalDateTime().isAfter(thisMonth) && a.getEnd().toLocalDateTime().isBefore(monthEnd)) {
-                        appointmentsByMonth.add(a);
-                    }
-                    apptTableView.setItems(appointmentsByMonth);
-                });
+                apptTableView.setItems(DBAppointments.getAllAppointments().stream()
+                        .filter(a -> a.getStart().toLocalDateTime().toLocalDate().getMonth() == LocalDate.now().getMonth())
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList)));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -309,17 +309,16 @@ public class mainController implements Initializable {
             ObservableList<Appointments> allAppointments = DBAppointments.getAllAppointments();
             ObservableList<Appointments> appointmentsByWeek = FXCollections.observableArrayList();
 
-            LocalDateTime thisWeek = LocalDateTime.now().minusMonths(1);
-            LocalDateTime wkend = LocalDateTime.now().plusMonths(1);
+            LocalDateTime thisWeek = LocalDate.now().with(WeekFields.ISO.getFirstDayOfWeek()).atStartOfDay();
+            LocalDateTime wkEnd = thisWeek.plusWeeks(1);
 
             //LAMBDA 2
-            if (allAppointments != null)
-                allAppointments.forEach(a -> {
-                    if (a.getEnd().toLocalDateTime().isAfter(thisWeek) && a.getEnd().toLocalDateTime().isBefore(wkend)) {
-                        appointmentsByWeek.add(a);
-                    }
-                    apptTableView.setItems(appointmentsByWeek);
-                });
+            if (allAppointments != null){
+
+                apptTableView.setItems(DBAppointments.getAllAppointments().stream()
+                        .filter(a -> a.getStart().toLocalDateTime().isAfter(thisWeek) && a.getStart().toLocalDateTime().isBefore(wkEnd))
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList)));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
